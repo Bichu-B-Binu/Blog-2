@@ -1,3 +1,4 @@
+<<<<<<< HEAD:blog/api/index.js
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -40,3 +41,5 @@ console.log("hellows");
 console.log("hellows");
 console.log("hellows");
 console.log("hellows");
+=======
+>>>>>>> 40e05ba2ebd7290666cfaffdf95ccb6aa8d1b5e7:Blog-Site/api/index.js
