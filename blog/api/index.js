@@ -1,4 +1,3 @@
-<<<<<<< HEAD:blog/api/index.js
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -18,28 +17,3 @@ const app = express();
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-console.log("hellows");
-=======
->>>>>>> 40e05ba2ebd7290666cfaffdf95ccb6aa8d1b5e7:Blog-Site/api/index.js
