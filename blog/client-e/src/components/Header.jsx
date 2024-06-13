@@ -2,14 +2,15 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
-import { Navbar, TextInput, Button } from "flowbite-react";
+import { Navbar, TextInput, Button, Dropdown, Avatar } from "flowbite-react";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   // const path = useLocation().pathname;
   const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState(0);
-
+  const { currentUser } = useSelector((state) => state.user);
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -70,15 +71,35 @@ const Header = () => {
           <Button className="w-12 h-10 hidden sm:inline" color="gray" pill>
             <FaMoon />
           </Button>
-          <Link to="/signIn">
-            <Button
-              gradientDuoTone="purpleToBlue"
-              outline
-              className=" hover:from-purple-600 to-blue-600"
+          {currentUser ? (
+            <Dropdown
+              arrowIcon={false}
+              inline
+              label={
+                <Avatar alt="user" img={currentUser.profilePicture} rounded />
+              }
             >
-              Sign In
-            </Button>
-          </Link>
+              <Dropdown.Header>
+                <span className=" block text-sm">@{currentUser.username}</span>
+                <span className=" block text-sm font-medium truncate">
+                  {currentUser.email}
+                </span>
+              </Dropdown.Header>
+              <Link to={"dashboard?tab=profile"}>
+                <Dropdown.Item>Profile</Dropdown.Item>
+              </Link>
+              <Dropdown.Divider>
+                <Dropdown.Item>Sign Out</Dropdown.Item>
+              </Dropdown.Divider>
+            </Dropdown>
+          ) : (
+            <Link to="/signIn">
+              <Button gradientDuoTone="purpleToBlue" outline>
+                Sign In
+              </Button>
+            </Link>
+          )}
+
           <div onClick={handleToggle} className="md:hidden">
             <RxHamburgerMenu className="h-10 w-12 text-gray-300" />
           </div>
