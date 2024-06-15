@@ -20,7 +20,6 @@ const Dashboard = () => {
         {/* sideBar */}
       </div>
       <div className="">
-        <DashProfile />
         {tab === "profile" && <DashProfile />}
         {/* profile */}
       </div>
