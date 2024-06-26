@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 export default function DashPosts() {
   const { currentUser } = useSelector((state) => state.user);
   const [userPosts, setUserPosts] = useState([]);
-  // const [showMore, setShowMore] = useState(true);
+  const [showMore, setShowMore] = useState(true);
   // const [showModal, setShowModal] = useState(false);
   // const [postIdToDelete, setPostIdToDelete] = useState('');
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function DashPosts() {
         if (res.ok) {
           setUserPosts(data.posts);
           if (data.posts.length < 9) {
-            // setShowMore(false);
+            setShowMore(false);
           }
         }
       } catch (error) {
@@ -31,23 +31,23 @@ export default function DashPosts() {
     }
   }, [currentUser._id]);
 
-  // const handleShowMore = async () => {
-  //   const startIndex = userPosts.length;
-  //   try {
-  //     const res = await fetch(
-  //       `/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`
-  //     );
-  //     const data = await res.json();
-  //     if (res.ok) {
-  //       setUserPosts((prev) => [...prev, ...data.posts]);
-  //       if (data.posts.length < 9) {
-  //         setShowMore(false);
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
+  const handleShowMore = async () => {
+    const startIndex = userPosts.length;
+    try {
+      const res = await fetch(
+        `/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`
+      );
+      const data = await res.json();
+      if (res.ok) {
+        setUserPosts((prev) => [...prev, ...data.posts]);
+        if (data.posts.length < 9) {
+          setShowMore(false);
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   // const handleDeletePost = async () => {
   //   setShowModal(false);
@@ -135,14 +135,14 @@ export default function DashPosts() {
                 </Table.Body>
               ))}
             </Table>
-            {/* {showMore && ( */}
-            <button
-              // onClick={handleShowMore}
-              className="w-full text-teal-500 self-center text-sm py-7"
-            >
-              Show more
-            </button>
-            {/* )} */}
+            {showMore && (
+              <button
+                onClick={handleShowMore}
+                className="w-full text-teal-500 self-center text-sm py-7"
+              >
+                Show more
+              </button>
+            )}
           </>
         ) : (
           <p>You have no posts yet!</p>
