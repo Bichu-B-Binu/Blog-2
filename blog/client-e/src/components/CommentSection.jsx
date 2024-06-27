@@ -43,20 +43,20 @@ export default function CommentSection({ postId }) {
     }
   };
 
-  //   useEffect(() => {
-  //     const getComments = async () => {
-  //       try {
-  //         const res = await fetch(`/api/comment/getPostComments/${postId}`);
-  //         if (res.ok) {
-  //           const data = await res.json();
-  //           setComments(data);
-  //         }
-  //       } catch (error) {
-  //         console.log(error.message);
-  //       }
-  //     };
-  //     getComments();
-  //   }, [postId]);
+  useEffect(() => {
+    const getComments = async () => {
+      try {
+        const res = await fetch(`/api/comment/getPostComments/${postId}`);
+        if (res.ok) {
+          const data = await res.json();
+          setComments(data);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    getComments();
+  }, [postId]);
 
   //   const handleLike = async (commentId) => {
   //     try {
@@ -189,7 +189,7 @@ export default function CommentSection({ postId }) {
           ))}
         </>
       )}
-      <Modal
+      {/* <Modal
         show={showModal}
         onClose={() => setShowModal(false)}
         popup
@@ -215,7 +215,7 @@ export default function CommentSection({ postId }) {
             </div>
           </div>
         </Modal.Body>
-      </Modal>
+      </Modal> */}
     </div>
   );
 }
