@@ -8,7 +8,6 @@ import PostCard from "../components/PostCard";
 export default function PostPage() {
   const { postSlug } = useParams();
   const [loading, setLoading] = useState(true);
-  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(false);
   const [post, setPost] = useState(null);
   const [recentPosts, setRecentPosts] = useState(null);
