@@ -3,9 +3,7 @@ import { useEffect, useState } from "react";
 import { FaThumbsUp } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Button, Textarea } from "flowbite-react";
-import { set } from "mongoose";
 
-// eslint-disable-next-line react/prop-types, no-unused-vars
 export default function Comment({ comment, onLike, onEdit, onDelete }) {
   const [user, setUser] = useState({});
   const [isEditing, setIsEditing] = useState(false);
@@ -14,7 +12,6 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
   useEffect(() => {
     const getUser = async () => {
       try {
-        // eslint-disable-next-line react/prop-types
         const res = await fetch(`/api/user/${comment.userId}`);
         const data = await res.json();
         if (res.ok) {
@@ -27,31 +24,30 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
     getUser();
   }, [comment]);
 
-  //   const handleEdit = () => {
-  //     setIsEditing(true);
-  //     // eslint-disable-next-line react/prop-types
-  //     setEditedContent(comment.content);
-  //   };
+  const handleEdit = () => {
+    setIsEditing(true);
+    setEditedContent(comment.content);
+  };
 
-  //   const handleSave = async () => {
-  //     try {
-  //       const res = await fetch(`/api/comment/editComment/${comment._id}`, {
-  //         method: "PUT",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           content: editedContent,
-  //         }),
-  //       });
-  //       if (res.ok) {
-  //         setIsEditing(false);
-  //         onEdit(comment, editedContent);
-  //       }
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-  //   };
+  const handleSave = async () => {
+    try {
+      const res = await fetch(`/api/comment/editComment/${comment._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: editedContent,
+        }),
+      });
+      if (res.ok) {
+        setIsEditing(false);
+        onEdit(comment, editedContent);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <div className="flex p-4 border-b dark:border-gray-600 text-sm">
       <div className="flex-shrink-0 mr-3">
@@ -104,11 +100,9 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
             <div className="flex items-center pt-2 text-xs border-t dark:border-gray-700 max-w-fit gap-2">
               <button
                 type="button"
-                // eslint-disable-next-line react/prop-types
                 onClick={() => onLike(comment._id)}
                 className={`text-gray-400 hover:text-blue-500 ${
                   currentUser &&
-                  // eslint-disable-next-line react/prop-types
                   comment.likes.includes(currentUser._id) &&
                   "!text-blue-500"
                 }`}
@@ -117,32 +111,28 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
               </button>
               <p className="text-gray-400">
                 {comment.numberOfLikes > 0 &&
-                  // eslint-disable-next-line react/prop-types
                   comment.numberOfLikes +
                     " " +
-                    // eslint-disable-next-line react/prop-types
                     (comment.numberOfLikes === 1 ? "like" : "likes")}
               </p>
               {currentUser &&
-                // eslint-disable-next-line react/prop-types
                 (currentUser._id === comment.userId || currentUser.isAdmin) && (
-                  // <>
-                  //   <button
-                  //     type="button"
-                  //     onClick={handleEdit}
-                  //     className="text-gray-400 hover:text-blue-500"
-                  //   >
-                  //     Edit
-                  //   </button>
-                  //   <button
-                  //     type="button"
-                  //     // eslint-disable-next-line react/prop-types
-                  //     onClick={() => onDelete(comment._id)}
-                  //     className="text-gray-400 hover:text-red-500"
-                  //   >
-                  //     Delete
-                  //   </button>
-                  // </>
+                  <>
+                    <button
+                      type="button"
+                      onClick={handleEdit}
+                      className="text-gray-400 hover:text-blue-500"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => onDelete(comment._id)}
+                      className="text-gray-400 hover:text-red-500"
+                    >
+                      Delete
+                    </button>
+                  </>
                 )}
             </div>
           </>
