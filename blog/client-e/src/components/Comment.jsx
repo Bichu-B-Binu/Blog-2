@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { Button, Textarea } from "flowbite-react";
 import { set } from "mongoose";
 
-// eslint-disable-next-line react/prop-types
+// eslint-disable-next-line react/prop-types, no-unused-vars
 export default function Comment({ comment, onLike, onEdit, onDelete }) {
   const [user, setUser] = useState({});
   const [isEditing, setIsEditing] = useState(false);
@@ -69,9 +69,8 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
           <span className="text-gray-500 text-xs">
             {moment(comment.createdAt).fromNow()}
           </span>
-          <p className=" text-gray-500 pb-2">{comment.content}</p>
         </div>
-        {/* {isEditing ? (
+        {isEditing ? (
           <>
             <Textarea
               className="mb-2"
@@ -147,7 +146,7 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
                 )}
             </div>
           </>
-        )} */}
+        )}
       </div>
     </div>
   );
